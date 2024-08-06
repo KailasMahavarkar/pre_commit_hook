@@ -1,0 +1,15 @@
+{
+	"name": "pre_commit_hook",
+	"version": "1.0.0",
+	"description": "",
+	"main": "mapping.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"precommit": "node change-classnames.js"
+	},
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"husky": "^9.1.4"
+	}
+}
