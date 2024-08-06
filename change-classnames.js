@@ -5,6 +5,8 @@ const glob = require("glob");
 const changeClassNames = (filePath) => {
 	let content = fs.readFileSync(filePath, "utf8");
 
+    console.log("working on file: ", filePath);
+
 	const classNameChanges = {
 		"bg-color-teal": "bg-neutral-200",
 		"bg-color-yellow": "bg-warning",
