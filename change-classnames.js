@@ -1,11 +1,25 @@
 const fs = require("fs");
 const path = require("path");
-const glob = require("glob");
+const log = console.log;
+
+const recursiveReadFiles = (dir) => {
+	let results = [];
+	const list = fs.readdirSync(dir);
+	list.forEach((file) => {
+		const filePath = path.resolve(dir, file);
+		const stat = fs.statSync(filePath);
+		if (stat && stat.isDirectory()) {
+			results = results.concat(recursiveReadFiles(filePath));
+		} else {
+			results.push(filePath);
+		}
+	});
+	return results;
+};
 
 const changeClassNames = (filePath) => {
 	let content = fs.readFileSync(filePath, "utf8");
-
-    console.log("working on file: ", filePath);
+	log("working on file: ", filePath);
 
 	const classNameChanges = {
 		"bg-color-teal": "bg-neutral-200",
@@ -23,11 +37,4 @@ const changeClassNames = (filePath) => {
 	fs.writeFileSync(filePath, content, "utf8");
 };
 
-glob("src/**/*.js", (err, files) => {
-	if (err) {
-		console.error(err);
-		process.exit(1);
-	}
-
-	files.forEach(changeClassNames);
-});
+recursiveReadFiles("src").forEach(changeClassNames);
