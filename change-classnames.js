@@ -5,11 +5,11 @@ const glob = require("glob");
 const changeClassNames = (filePath) => {
 	let content = fs.readFileSync(filePath, "utf8");
 
-	// Define your class name changes here
 	const classNameChanges = {
-		"old-classname": "new-classname",
-		"another-old-classname": "another-new-classname",
-		// Add more class name changes as needed
+		"bg-color-teal": "bg-neutral-200",
+		"bg-color-yellow": "bg-warning",
+		"color-red": "text-danger",
+		"color-yellow": "text-warning",
 	};
 
 	Object.keys(classNameChanges).forEach((oldClassName) => {
